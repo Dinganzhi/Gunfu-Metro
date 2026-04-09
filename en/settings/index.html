@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gunfu Metro|Settings</title>
+        <link rel="icon" type="image/svg" href="/src/icon.svg" />
+        <link rel="stylesheet" type="text/css" href="/src/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
+        />
+        <script src="/src/js/dataInclude.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        <!--<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileLoad" async defer></script>
+    <script src="/src/js/turnstile.js" defer></script>-->
+        <style>
+            /* 可选：保证主题切换时导航栏和文本样式正确 */
+            body {
+                transition: background-color 0.2s ease;
+            }
+        </style>
+    </head>
+    <body class="bg-light">
+        <div data-include="/src/html/header-en.html"></div>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <h4 class="mb-0">Settings</h4>
+                    <!-- 色彩模式 -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Theme</label>
+                        <select id="themeSelect" class="form-select">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="system">System</option>
+                        </select>
+                        <div class="form-text">
+                            Change website's theme. It will follow system's
+                            theme if you choose "System".
+                        </div>
+                    </div>
+
+                    <!-- 字体选择 -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Fonts</label>
+                        <select id="fontSelect" class="form-select">
+                            <option value="default">Default</option>
+                            <option value="mojangles">Mojangles</option>
+                            <option value="unifont">GNU Unifont</option>
+                        </select>
+                        <div class="form-text">
+                            Change to website's fonts. Take a while to load at
+                            the first time.
+                        </div>
+                    </div>
+
+                    <!-- 语言选择 -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Language</label>
+                        <select id="langSelect" class="form-select">
+                            <option value="zh-Hans">简体中文</option>
+                            <option value="en">English</option>
+                        </select>
+                        <div class="form-text">
+                            Redirect to your choice next time.
+                        </div>
+                    </div>
+
+                    <!-- 保存并返回首页按钮 -->
+                    <button id="saveAndHomeBtn" class="btn btn-primary w-100">
+                        Save and return to home page
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="/src/js/setting.js"></script>
+        <script>
+            (function () {
+                // 等待 DOM 完全加载
+                document.addEventListener("DOMContentLoaded", function () {
+                    const themeSelect = document.getElementById("themeSelect");
+                    const fontSelect = document.getElementById("fontSelect");
+                    const langSelect = document.getElementById("langSelect");
+                    const saveBtn = document.getElementById("saveAndHomeBtn");
+
+                    // 调试：打印当前 Cookie 值
+                    console.log(
+                        "Cookie 中的语言:",
+                        SettingsManager.getCurrentLanguage(),
+                    );
+                    console.log(
+                        "Cookie 中的主题:",
+                        SettingsManager.getCurrentTheme(),
+                    );
+                    console.log(
+                        "Cookie 中的字体:",
+                        SettingsManager.getCurrentFontKey(),
+                    );
+
+                    // 回显主题
+                    const currentTheme = SettingsManager.getCurrentTheme();
+                    if (
+                        currentTheme &&
+                        ["light", "dark", "system"].includes(currentTheme)
+                    ) {
+                        themeSelect.value = currentTheme;
+                    } else {
+                        themeSelect.value = "light"; // 默认浅色
+                    }
+
+                    // 回显字体
+                    const currentFont = SettingsManager.getCurrentFontKey();
+                    const fontOptions = SettingsManager.getFontOptions();
+                    if (currentFont && fontOptions[currentFont]) {
+                        fontSelect.value = currentFont;
+                    } else {
+                        fontSelect.value = "default";
+                    }
+
+                    // 回显语言：处理旧值 'zh' 并映射到 'zh-Hans'
+                    let currentLang = SettingsManager.getCurrentLanguage();
+                    if (currentLang === "zh") {
+                        // 可选：将旧值更新为 zh-Hans（如果希望自动修正）
+                        // SettingsManager.setLanguageOnly('zh-Hans');
+                        currentLang = "zh-Hans";
+                    }
+                    if (currentLang === "zh-Hans" || currentLang === "en") {
+                        langSelect.value = currentLang;
+                        console.log("语言下拉框已设置为:", currentLang);
+                    } else {
+                        // 没有保存的语言，默认中文
+                        langSelect.value = "zh-Hans";
+                        console.log("未找到语言 Cookie，使用默认中文");
+                    }
+
+                    // 保存并跳转
+                    saveBtn.addEventListener("click", function () {
+                        const theme = themeSelect.value;
+                        const fontKey = fontSelect.value;
+                        const language = langSelect.value;
+
+                        // 保存设置
+                        SettingsManager.saveSettings(
+                            theme,
+                            fontKey,
+                            language,
+                            false,
+                        );
+
+                        // 构建跳转 URL（根据实际站点结构调整）
+                        let targetUrl = "/";
+                        if (language === "zh-Hans") {
+                            targetUrl = "/zh-Hans/";
+                        } else if (language === "en") {
+                            targetUrl = "/en/";
+                        }
+                        // 也可以使用 SettingsManager.goToLanguagePage(language, '/')
+                        console.log("准备跳转到:", targetUrl);
+                        window.location.href = targetUrl;
+                    });
+                    SettingsManager.init(); // 自动读取 Cookie 并应用主题、字体、语言
+                });
+            })();
+        </script>
+    </body>
+</html>

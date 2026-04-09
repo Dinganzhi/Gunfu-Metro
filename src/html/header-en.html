@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-md bg-light navbar-light">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/en" style="margin-left: 10px"
+        ><i class="fa fa-subway"></i> Gunfu Rail Transit</a
+    >
+
+    <!-- Toggler/collapsibe Button -->
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapsibleNavbar"
+        style="margin-right: 10px"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div
+        class="collapse navbar-collapse"
+        id="collapsibleNavbar"
+        style="margin-left: 10px; margin-right: 10px"
+    >
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/en/networkmap">Network Map</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="text-use-theme nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbardrop"
+                    data-bs-toggle="dropdown"
+                >
+                    Tools
+                </a>
+                <div class="text-use-theme dropdown-menu">
+                    <a class="dropdown-item text-no-theme" href="/en/transfer"
+                        >Line Transfer Finder</a
+                    >
+                    <a class="dropdown-item text-no-theme" href="/en/route"
+                        >Line Route Finder</a
+                    >
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/en/settings">Settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/en/about">About</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="text-use-theme nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbardrop"
+                    data-bs-toggle="dropdown"
+                >
+                    语言 Language
+                </a>
+                <div class="text-use-theme dropdown-menu">
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="/zh-Hans"
+                        onclick="SettingsManager.setLanguageOnly('zh-Hans')"
+                        >简体中文</a
+                    >
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="/en"
+                        onclick="SettingsManager.setLanguageOnly('en')"
+                        >English</a
+                    >
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

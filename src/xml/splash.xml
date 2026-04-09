@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<text>
+    <zh-Hans>
+        <msg>都跟你说了不要动这东西</msg>
+        <msg>自己才是最重要的</msg>
+        <msg>先别急</msg>
+        <msg>闲人免入</msg>
+        <msg>java.lang.NullPointerException</msg>
+        <msg>不要在意太多</msg>
+        <msg>知道就好</msg>
+        <msg>像素</msg>
+        <msg>深藏不露</msg>
+        <msg>小心触电</msg>
+        <msg>回去等通知吧</msg>
+        <msg>十分稳定</msg>
+        <msg>多试试</msg>
+        <msg>记得睡觉</msg>
+        <msg>这很神圣啊</msg>
+        <msg>要学到精髓</msg>
+        <msg>你能行</msg>
+        <msg>吓人</msg>
+        <msg>总有你满意的</msg>
+        <msg>生物适应环境</msg>  
+    </zh-Hans>
+    <en>
+        <msg>I told you not to touch this thing</msg>
+        <msg>You yourself are the most important</msg>
+        <msg>Don't rush</msg>
+        <msg>No admittance for the idle</msg>
+        <msg>java.lang.NullPointerException</msg>
+        <msg>Don't care too much</msg>
+        <msg>Glad you know</msg>
+        <msg>Pixel</msg>
+        <msg>Still waters run deep</msg>
+        <msg>Caution: electric shock hazard</msg>
+        <msg>Go back and wait for notification</msg>
+        <msg>Very stable</msg>
+        <msg>Try more times</msg>
+        <msg>Remember to sleep</msg>
+        <msg>This is so sacred</msg>
+        <msg>Learn the essence</msg>
+        <msg>You can do it</msg>
+        <msg>Scary</msg>
+        <msg>There's always something you'll like</msg>
+        <msg>Organisms adapt to the environment</msg>
+    </en>
+</text>

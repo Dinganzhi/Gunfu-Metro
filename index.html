@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>语言 Language</title>
+        <link rel="icon" type="image/svg" href="/src/icon.svg" />
+        <!-- Bootstrap 5.1.3 CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- 设置管理器（延迟加载，确保 DOM 解析完成后执行） -->
+        <script src="/src/js/setting.js" defer></script>
+        <link href="/src/css/style.css" rel="stylesheet" />
+        <!--<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileLoad" async defer></script>
+    <script src="/src/js/turnstile.js" defer></script>-->
+    </head>
+    <body class="bg-light">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <h4 class="mb-3">选择语言 Select Language</h4>
+                    <div class="mb-3">
+                        <select id="languageSelect" class="form-select">
+                            <option value="zh-Hans">简体中文</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                    <button id="saveBtn" class="btn btn-primary w-100">
+                        继续 Continue
+                    </button>
+                    <div
+                        id="errorMsg"
+                        class="alert alert-danger mt-3 d-none"
+                        role="alert"
+                    ></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            (function () {
+                // 确保 DOM 和 defer 脚本都加载完成后再执行核心逻辑
+                document.addEventListener("DOMContentLoaded", function () {
+                    // 检查 SettingsManager 是否可用
+                    if (typeof SettingsManager === "undefined") {
+                        const errorDiv = document.getElementById("errorMsg");
+                        errorDiv.textContent =
+                            "加载设置模块失败，请刷新页面重试。";
+                        errorDiv.classList.remove("d-none");
+                        document.getElementById("saveBtn").disabled = true;
+                        return;
+                    }
+
+                    let isRedirecting = false; // 防止重复跳转
+
+                    // 1. 检查已有语言偏好
+                    const currentLang = SettingsManager.getCurrentLanguage();
+                    if (currentLang && !isRedirecting) {
+                        isRedirecting = true;
+                        window.location.href = "/" + currentLang;
+                        return; // 跳转后不再执行后续逻辑
+                    }
+
+                    // 2. 没有偏好时，可选：根据浏览器语言预选下拉框（提升体验）
+                    const browserLang =
+                        navigator.language || navigator.userLanguage;
+                    const selectEl = document.getElementById("languageSelect");
+                    if (browserLang.startsWith("zh")) {
+                        selectEl.value = "zh-Hans";
+                    } else if (browserLang.startsWith("en")) {
+                        selectEl.value = "en";
+                    }
+
+                    // 3. 调用 SettingsManager 的初始化（比如加载主题、字体等，不会覆盖语言选择）
+                    SettingsManager.init();
+
+                    // 4. 保存按钮点击处理
+                    const saveBtn = document.getElementById("saveBtn");
+                    saveBtn.addEventListener("click", function () {
+                        if (isRedirecting) return;
+                        const selectedLang = selectEl.value;
+                        SettingsManager.setLanguageOnly(selectedLang);
+                        isRedirecting = true;
+                        window.location.href = "/" + selectedLang;
+                    });
+                });
+            })();
+        </script>
+    </body>
+</html>

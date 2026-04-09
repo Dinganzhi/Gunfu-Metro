@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-md bg-light navbar-light">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/zh-Hans" style="margin-left: 10px"
+        ><i class="fa fa-subway"></i> 滚服轨道交通</a
+    >
+
+    <!-- Toggler/collapsibe Button -->
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapsibleNavbar"
+        style="margin-right: 10px"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div
+        class="collapse navbar-collapse"
+        id="collapsibleNavbar"
+        style="margin-left: 10px; margin-right: 10px"
+    >
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/zh-Hans/networkmap">网络示意图</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="text-use-theme nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbardrop"
+                    data-bs-toggle="dropdown"
+                >
+                    工具
+                </a>
+                <div class="text-use-theme dropdown-menu">
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="/zh-Hans/transfer"
+                        >线路换乘查询</a
+                    >
+                    <a class="dropdown-item text-no-theme" href="/zh-Hans/route"
+                        >地铁线路计算</a
+                    >
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/zh-Hans/settings">设置</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/zh-Hans/about">关于</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="text-use-theme nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbardrop"
+                    data-bs-toggle="dropdown"
+                >
+                    语言 Language
+                </a>
+                <div class="text-use-theme dropdown-menu">
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="/zh-Hans"
+                        onclick="SettingsManager.setLanguageOnly('zh-Hans')"
+                        >简体中文</a
+                    >
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="/en"
+                        onclick="SettingsManager.setLanguageOnly('en')"
+                        >English</a
+                    >
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

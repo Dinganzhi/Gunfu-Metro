@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gunfu Metro|Home</title>
+        <link rel="icon" type="image/svg" href="/src/icon.svg" />
+        <link rel="stylesheet" type="text/css" href="/src/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
+        />
+        <script src="/src/js/dataInclude.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        <script src="/src/js/setting.js" defer></script>
+        <script src="/src/js/splash.js" defer></script>
+        <!--<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileLoad" async defer></script>
+    <script src="/src/js/turnstile.js" defer></script>-->
+    </head>
+    <body class="bg-light">
+        <div data-include="/src/html/header-en.html"></div>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <h1>Welcome!</h1>
+                    <div id="splash" class="text-no-theme"></div>
+                    <h5>
+                        Use the navigation bar above to navigate to different
+                        pages.
+                    </h5>
+                    <div class="alert alert-info">
+                        <h4 class="text-no-theme">News</h4>
+                        <h6 class="text-no-theme">
+                            The Gunfu Metro Line 2 officially opened on March
+                            21. For details on the route and station
+                            information, please see
+                            <a href="/en/networkmap" class="alert-link"
+                                >Network Map</a
+                            >
+                        </h6>
+                    </div>
+                    <div class="alert alert-success">
+                        <h4 class="text-no-theme">New Tool</h4>
+                        <h6 class="text-no-theme">
+                            Can't find the right route? Try our new “Line Route
+                            Finder” tool.
+                            <a href="/en/route" class="alert-link"
+                                >Give it a try</a
+                            >
+                        </h6>
+                    </div>
+                    <br />
+                    <h3>Theme Update: Open Source Time</h3>
+                    <h5>
+                        With the arrival of April’s spring breeze comes a new
+                        update. This update includes mobile optimization, making
+                        it easier to browse the website on mobile devices. We’ve
+                        also added English translations for two features,
+                        enriching the website’s content. Additionally, we’ve
+                        open-sourced the website by uploading it to a GitHub
+                        repository, so we can all grow together.
+                    </h5>
+                    <br />
+                    <p>
+                        If you have any questions, please feel free to email us:
+                        d963793201@163.com<br />
+                        Join our QQ Group for discussing！Also can share you own
+                        suggestions！<br />
+                        QQ Group：1081037038 or
+                        <a href="https://qm.qq.com/q/tuXjvcVMRi"
+                            >Click here to go to QQ</a
+                        ><br />
+                        For more information，please go to
+                        <a href="/en/about">About</a><br />
+                        <a href="/en/transfer">Click here</a> to go to "Route
+                        Finder"<br />
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                SettingsManager.init(); // 自动读取 Cookie 并应用主题、字体、语言
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>滾服地鐵|首頁</title>
+        <link rel="icon" type="image/svg" href="/src/icon.svg" />
+        <link rel="stylesheet" type="text/css" href="/src/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
+        />
+        <script src="/src/js/dataInclude.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        <script src="/src/js/setting.js" defer></script>
+        <script src="/src/js/splash.js" defer></script>
+        <!--<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileLoad" async defer></script>
+    <script src="/src/js/turnstile.js" defer></script>-->
+    </head>
+    <body class="bg-light">
+        <div data-include="/src/html/header-zh-Hans.html"></div>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <h1>歡迎！</h1>
+                    <div id="splash" class="text-no-theme"></div>
+                    <h5>在上方的導航欄前往各色頁面</h5>
+                    <div class="alert alert-info">
+                        <h4 class="text-no-theme">最新消息</h4>
+                        <h6 class="text-no-theme">
+                            滾服地鐵2號線在3月21日正式開通運營，詳細線路大致走向及車站信息請見<a
+                                href="/zh-Hans/networkmap"
+                                class="alert-link"
+                                >網絡示意圖</a
+                            >
+                        </h6>
+                    </div>
+                    <div class="alert alert-success">
+                        <h4 class="text-no-theme">新功能</h4>
+                        <h6 class="text-no-theme">
+                            找不到合適的乘坐路線？，來試試新功能“地鐵線路計算”<a
+                                href="/zh-Hans/route"
+                                class="alert-link"
+                                >去試試</a
+                            >
+                        </h6>
+                    </div>
+                    <br />
+                    <h3>主題更新：開源盛世</h3>
+                    <h5>
+                        4月的春風吹來，帶來的是新的更新內容。此次更新，增加了對手機端的適配，現在在手機端上也可以方便的浏覽網頁。還給兩個功能添加了英文翻譯，使網站更加豐富多彩。另外，此次還將網頁上傳到了GitHub上的倉庫開源，讓妳我能共進步。
+                    </h5>
+                    <br />
+                    <p>
+                        任何問題都可以發郵箱反饋 d963793201@163.com<br />
+                        加入我們的QQ外群來討論！亦可提出見解！<br />
+                        QQ群：1081037038 或
+                        <a href="https://qm.qq.com/q/tuXjvcVMRi">點我跳轉到QQ</a
+                        ><br />
+                        若需其他的詳細信息，請移步至<a href="/zh-Hans/about"
+                            >關于</a
+                        >頁面<br />
+                        <a href="/zh-Hans/transfer">點擊此處</a
+                        >前往“線路換乘查詢”測試頁面<br />
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                SettingsManager.init(); // 自动读取 Cookie 并应用主题、字体、语言
+            });
+        </script>
+    </body>
+</html>

@@ -120,20 +120,21 @@ async function initData() {
             const lineElements = xmlDoc.getElementsByTagName("line");
             lineList = [];
             for (let i = 0; i < lineElements.length; i++) {
-                const code =
-                    lineElements[i].getElementsByTagName("code")[0]
-                        ?.textContent;
-                let zhName =
-                    lineElements[i].getElementsByTagName("zh")[0]?.textContent;
-                let enName =
-                    lineElements[i].getElementsByTagName("en")[0]?.textContent;
-                if (!zhName && !enName) {
-                    const oldName =
-                        lineElements[i].getElementsByTagName("name")[0]
-                            ?.textContent;
-                    if (oldName) {
-                        zhName = oldName;
-                        enName = oldName;
+                const code = lineElements[i]
+                    .getElementsByTagName("code")[0]
+                    ?.textContent?.trim();
+                const nameEl = lineElements[i].getElementsByTagName("name")[0];
+                if (nameEl && code) {
+                    const zhEl = nameEl.getElementsByTagName("zh")[0];
+                    const enEl = nameEl.getElementsByTagName("en")[0];
+                    const zhName = zhEl ? zhEl.textContent?.trim() : null;
+                    const enName = enEl ? enEl.textContent?.trim() : null;
+                    if (zhName && enName) {
+                        lineMap[code] = { zh: zhName, en: enName };
+                        lineList.push({ code, nameZh: zhName, nameEn: enName });
+                    } else {
+                        lineMap[code] = { zh: code, en: code };
+                        lineList.push({ code, nameZh: code, nameEn: code });
                     }
                 }
                 if (code && zhName && enName) {
@@ -167,8 +168,21 @@ async function initData() {
                 }
                 const lineEl =
                     stationElements[i].getElementsByTagName("line")[0];
-                if (idEl && zhName && enName && lineEl) {
-                    const id = idEl.textContent;
+                if (idEl && nameEl && lineEl) {
+                    const id = idEl.textContent.trim();
+                    const zhEl = nameEl.getElementsByTagName("zh")[0];
+                    const enEl = nameEl.getElementsByTagName("en")[0];
+                    const zhName = zhEl ? zhEl.textContent?.trim() : null;
+                    const enName = enEl ? enEl.textContent?.trim() : null;
+                    if (!zhName || !enName) {
+                        stations.push({
+                            id,
+                            name: { zh: id, en: id },
+                            lineGroups: [[]],
+                            rawLine: "",
+                        });
+                        continue;
+                    }
                     const name = { zh: zhName, en: enName };
                     const line = lineEl.textContent;
                     const lineGroups = line.split(";").map((group) =>

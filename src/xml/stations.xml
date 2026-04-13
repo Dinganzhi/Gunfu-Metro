@@ -3,7 +3,8 @@
     <station>
         <id>A001</id>
         <name>
-            <zh>滚服站</zh>
+            <zh-Hans>滚服站</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Gunfu Railway Station</en>
         </name>
         <line>A1,A4,A6,B1,B3,S1</line>
@@ -18,7 +19,8 @@
     <station>
         <id>A002</id>
         <name>
-            <zh>刷铁机</zh>
+            <zh-Hans>刷铁机</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Iron Golem Farming</en>
         </name>
         <line>B1,B2</line>
@@ -33,7 +35,8 @@
     <station>
         <id>A003</id>
         <name>
-            <zh>合欢沟/金合欢小区</zh>
+            <zh-Hans>合欢沟/金合欢小区</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Hehuan'gou / Jinhehuan Housing Estate</en>
         </name>
         <line>A4;B1,B3,B4</line>
@@ -48,7 +51,8 @@
     <station>
         <id>A004</id>
         <name>
-            <zh>树林</zh>
+            <zh-Hans>树林</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Forest</en>
         </name>
         <line>B2,B3</line>
@@ -62,7 +66,8 @@
     <station>
         <id>A005</id>
         <name>
-            <zh>滚服金合欢乐魂站</zh>
+            <zh-Hans>滚服金合欢乐魂站</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Gunfu Acacia Happy Ghast Station</en>
         </name>
         <line>B3</line>
@@ -74,7 +79,8 @@
     <station>
         <id>A006</id>
         <name>
-            <zh>河畔东路/河畔前岸</zh>
+            <zh-Hans>河畔东路/河畔前岸</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>East Riverbank Road / Riverbank Frontage</en>
         </name>
         <line>B2,S1;T1</line>
@@ -87,7 +93,8 @@
     <station>
         <id>A007</id>
         <name>
-            <zh>河畔南县</zh>
+            <zh-Hans>河畔南县</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Riverbank South Town</en>
         </name>
         <line>B2,B4</line>
@@ -99,7 +106,8 @@
     <station>
         <id>A008</id>
         <name>
-            <zh>铁院南</zh>
+            <zh-Hans>铁院南</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>South Tieyuan</en>
         </name>
         <line>B4</line>
@@ -108,7 +116,8 @@
     <station>
         <id>A009</id>
         <name>
-            <zh>前屿</zh>
+            <zh-Hans>前屿</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Qian Islet</en>
         </name>
         <line>B4,S1</line>
@@ -117,7 +126,8 @@
     <station>
         <id>A010</id>
         <name>
-            <zh>村民交易所</zh>
+            <zh-Hans>村民交易所</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Villager Trading Hall</en>
         </name>
         <line>S1</line>
@@ -126,7 +136,8 @@
     <station>
         <id>A011</id>
         <name>
-            <zh>出生点</zh>
+            <zh-Hans>出生点</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Spawn Point</en>
         </name>
         <line>A1</line>
@@ -138,7 +149,8 @@
     <station>
         <id>A012</id>
         <name>
-            <zh>信标</zh>
+            <zh-Hans>信标</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Beacon</en>
         </name>
         <line>A1</line>
@@ -151,7 +163,8 @@
     <station>
         <id>A013</id>
         <name>
-            <zh>恶魂塔</zh>
+            <zh-Hans>恶魂塔</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Ghast Farming</en>
         </name>
         <line>A1</line>
@@ -165,7 +178,8 @@
     <station>
         <id>A014</id>
         <name>
-            <zh>1Liad的城堡</zh>
+            <zh-Hans>1Liad的城堡</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>1Liad's Castle</en>
         </name>
         <line>A1,A3</line>
@@ -178,7 +192,8 @@
     <station>
         <id>A015</id>
         <name>
-            <zh>高尔夫球场</zh>
+            <zh-Hans>高尔夫球场</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Golf Course</en>
         </name>
         <line>T1</line>
@@ -187,7 +202,8 @@
     <station>
         <id>B001</id>
         <name>
-            <zh>水磨沟</zh>
+            <zh-Hans>水磨沟</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Shuimogou</en>
         </name>
         <line>C1</line>
@@ -199,7 +215,8 @@
     <station>
         <id>B002</id>
         <name>
-            <zh>水磨沟北</zh>
+            <zh-Hans>水磨沟北</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>North Shuimogou</en>
         </name>
         <line>A1,A3;C1</line>
@@ -213,7 +230,8 @@
     <station>
         <id>B003</id>
         <name>
-            <zh>樱花村</zh>
+            <zh-Hans>樱花村</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Cherry Blossom Village</en>
         </name>
         <line>A1,A2</line>
@@ -225,7 +243,8 @@
     <station>
         <id>B004</id>
         <name>
-            <zh>末地传送门</zh>
+            <zh-Hans>末地传送门</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>End Portal</en>
         </name>
         <line>A2</line>
@@ -236,7 +255,8 @@
     <station>
         <id>B005</id>
         <name>
-            <zh>草甸站</zh>
+            <zh-Hans>草甸站</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Meadow Railway Station</en>
         </name>
         <line>A3,A5</line>
@@ -249,7 +269,8 @@
     <station>
         <id>B006</id>
         <name>
-            <zh>掠夺者前哨站</zh>
+            <zh-Hans>掠夺者前哨站</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Pillager Outpost</en>
         </name>
         <line>A5</line>
@@ -258,7 +279,8 @@
     <station>
         <id>C001</id>
         <name>
-            <zh>滚木站</zh>
+            <zh-Hans>滚木站</zh-Hans>
+            <zh-Hant></zh-Hant>
             <en>Gunmu Railway Station</en>
         </name>
         <line>A6</line>

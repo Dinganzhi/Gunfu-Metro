@@ -22,8 +22,21 @@
         style="margin-left: 10px; margin-right: 10px"
     >
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/zh-Hans/networkmap">网络示意图</a>
+            <li class="text-use-theme nav-item dropdown">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbardrop"
+                    data-bs-toggle="dropdown"
+                >
+                    信息
+                </a>
+                <div class="text-use-theme dropdown-menu">
+                    <a class="nav-link" href="/zh-Hans/networkmap"
+                        >网络示意图</a
+                    >
+                    <a class="dropdown-item text-no-theme" href="">加入我们</a>
+                </div>
             </li>
             <!-- Dropdown -->
             <li class="text-use-theme nav-item dropdown">
@@ -43,6 +56,11 @@
                     >
                     <a class="dropdown-item text-no-theme" href="/zh-Hans/route"
                         >地铁线路计算</a
+                    >
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="https://qun.qq.com/universal-share/share?ac=1&authKey=xIE6BsyUKaoi8OnsVVUajoF5fXOzgG8%2BtBmQ23dzGACzp7w/Llvuf3lLPd62EaLv&busi_data=eyJncm91cENvZGUiOiIxMDgxMDM3MDM4IiwidG9rZW4iOiJ0Slp1ekNkZHNwOHovVE1XNS8rL1BkYXkwV0tSeFlVZUxKQzNjYUgrOTlvVUFCU1REcU9WYXZBSEVacDRrdGJZIiwidWluIjoiMjIxODYzMTA0MyJ9&data=XzJ1iWGbaZSo_dfH2CZETO7IovWrEGh20MHPmwpDM_gQTfHzf6T1JBy8gdLA8XvMMECtLWzlAxyHSmruEoHLZE7sfL49Gaetaq5MK6NciJk&svctype=5&tempid=h5_group_info"
+                        >加入我们</a
                     >
                 </div>
             </li>
@@ -70,6 +88,12 @@
                         href="/zh-Hans"
                         onclick="SettingsManager.setLanguageOnly('zh-Hans')"
                         >简体中文</a
+                    >
+                    <a
+                        class="dropdown-item text-no-theme"
+                        href="/zh-Hant"
+                        onclick="SettingsManager.setLanguageOnly('zh-Hant')"
+                        >繁體中文</a
                     >
                     <a
                         class="dropdown-item text-no-theme"

@@ -15,6 +15,22 @@ const langPack = {
         noResult: "没有找到符合条件的站点。",
         stationLines: "线路：",
     },
+    "zh-Hant": {
+        loading: "正在載入資料…",
+        errorLoad: "載入資料出錯",
+        line1Label: "第一條路線",
+        line2Label: "第二條路線",
+        filterBtn: "查詢",
+        sameLineAlert: "請選擇兩條不同的路線",
+        dataNotReady: "資料尚未載入完成，請稍候",
+        resultTitle: (count) => `共找到了${count}個符合條件的車站：`,
+        sameGroupTitle: (count) => `找到了${count}個換乘車站：`,
+        crossGroupTitle: (count) => `找到了${count}個出站換乘／轉乘車站：`,
+        noSameGroup: "沒有找到換乘車站。",
+        noCrossGroup: "沒有找到出站換乘／轉乘車站。",
+        noResult: "沒有找到符合條件的車站。",
+        stationLines: "路線：",
+    },
     en: {
         loading: "Loading Data...",
         errorLoad: "Error Loading Data",
@@ -49,10 +65,11 @@ function detectLanguage() {
         .find((row) => row.startsWith("language="));
     if (cookieLang) {
         const lang = cookieLang.split("=")[1];
-        if (lang === "zh-Hans" || lang === "en") return lang;
+        if (lang === "zh-Hans" || lang === "zh-Hant" || lang === "en")
+            return lang;
     }
     const path = window.location.pathname;
-    if (path.includes("/zh-Hans/")) return "zh-Hans";
+    if (path.includes("/zh-Hant/")) return "zh-Hant";
     if (path.includes("/en/")) return "en";
     return "zh-Hans";
 }
@@ -79,9 +96,6 @@ function loadXMLData(url, callback) {
                 if (xhr.status === 200 || xhr.status === 304) {
                     let xmlDoc = xhr.responseXML;
                     if (!xmlDoc || !xmlDoc.documentElement) {
-                        console.warn(
-                            `responseXML is null for ${url}, trying manual parse.`,
-                        );
                         const parser = new DOMParser();
                         xmlDoc = parser.parseFromString(
                             xhr.responseText,
@@ -125,24 +139,52 @@ async function initData() {
                     ?.textContent?.trim();
                 const nameEl = lineElements[i].getElementsByTagName("name")[0];
                 if (nameEl && code) {
-                    const zhEl = nameEl.getElementsByTagName("zh")[0];
-                    const enEl = nameEl.getElementsByTagName("en")[0];
-                    const zhName = zhEl ? zhEl.textContent?.trim() : null;
-                    const enName = enEl ? enEl.textContent?.trim() : null;
-                    if (zhName && enName) {
-                        lineMap[code] = { zh: zhName, en: enName };
-                        lineList.push({ code, nameZh: zhName, nameEn: enName });
+                    const zhHans = nameEl
+                        .getElementsByTagName("zh-Hans")[0]
+                        ?.textContent?.trim();
+                    const zhHant = nameEl
+                        .getElementsByTagName("zh-Hant")[0]
+                        ?.textContent?.trim();
+                    const en = nameEl
+                        .getElementsByTagName("en")[0]
+                        ?.textContent?.trim();
+                    if (zhHans && zhHant && en) {
+                        lineMap[code] = {
+                            "zh-Hans": zhHans,
+                            "zh-Hant": zhHant,
+                            en,
+                        };
+                        lineList.push({
+                            code,
+                            nameZh: zhHans,
+                            nameZhHant: zhHant,
+                            nameEn: en,
+                        });
                     } else {
-                        lineMap[code] = { zh: code, en: code };
-                        lineList.push({ code, nameZh: code, nameEn: code });
+                        lineMap[code] = {
+                            "zh-Hans": code,
+                            "zh-Hant": code,
+                            en: code,
+                        };
+                        lineList.push({
+                            code,
+                            nameZh: code,
+                            nameZhHant: code,
+                            nameEn: code,
+                        });
                     }
-                }
-                if (code && zhName && enName) {
-                    lineMap[code] = { zh: zhName, en: enName };
-                    lineList.push({ code, nameZh: zhName, nameEn: enName });
                 } else if (code) {
-                    lineMap[code] = { zh: code, en: code };
-                    lineList.push({ code, nameZh: code, nameEn: code });
+                    lineMap[code] = {
+                        "zh-Hans": code,
+                        "zh-Hant": code,
+                        en: code,
+                    };
+                    lineList.push({
+                        code,
+                        nameZh: code,
+                        nameZhHant: code,
+                        nameEn: code,
+                    });
                 }
             }
         });
@@ -151,46 +193,42 @@ async function initData() {
             const stationElements = xmlDoc.getElementsByTagName("station");
             for (let i = 0; i < stationElements.length; i++) {
                 const idEl = stationElements[i].getElementsByTagName("id")[0];
-                let zhName =
-                    stationElements[i].getElementsByTagName("zh")[0]
-                        ?.textContent;
-                let enName =
-                    stationElements[i].getElementsByTagName("en")[0]
-                        ?.textContent;
-                if (!zhName && !enName) {
-                    const oldName =
-                        stationElements[i].getElementsByTagName("name")[0]
-                            ?.textContent;
-                    if (oldName) {
-                        zhName = oldName;
-                        enName = oldName;
-                    }
-                }
+                const nameEl =
+                    stationElements[i].getElementsByTagName("name")[0];
                 const lineEl =
                     stationElements[i].getElementsByTagName("line")[0];
                 if (idEl && nameEl && lineEl) {
                     const id = idEl.textContent.trim();
-                    const zhEl = nameEl.getElementsByTagName("zh")[0];
-                    const enEl = nameEl.getElementsByTagName("en")[0];
-                    const zhName = zhEl ? zhEl.textContent?.trim() : null;
-                    const enName = enEl ? enEl.textContent?.trim() : null;
-                    if (!zhName || !enName) {
+                    const zhHans = nameEl
+                        .getElementsByTagName("zh-Hans")[0]
+                        ?.textContent?.trim();
+                    const zhHant = nameEl
+                        .getElementsByTagName("zh-Hant")[0]
+                        ?.textContent?.trim();
+                    const en = nameEl
+                        .getElementsByTagName("en")[0]
+                        ?.textContent?.trim();
+                    if (!zhHans || !zhHant || !en) {
                         stations.push({
                             id,
-                            name: { zh: id, en: id },
+                            name: { "zh-Hans": id, "zh-Hant": id, en: id },
                             lineGroups: [[]],
                             rawLine: "",
                         });
                         continue;
                     }
-                    const name = { zh: zhName, en: enName };
-                    const line = lineEl.textContent;
-                    const lineGroups = line.split(";").map((group) =>
-                        group
-                            .split(",")
-                            .map((l) => l.trim())
-                            .filter((l) => l !== ""),
-                    );
+                    const name = { "zh-Hans": zhHans, "zh-Hant": zhHant, en };
+                    let line = lineEl.textContent?.trim() || "";
+                    let lineGroups = [];
+                    if (line) {
+                        lineGroups = line.split(";").map((group) =>
+                            group
+                                .split(",")
+                                .map((l) => l.trim())
+                                .filter((l) => l !== ""),
+                        );
+                    }
+                    if (lineGroups.length === 0) lineGroups = [[]];
                     stations.push({ id, name, lineGroups, rawLine: line });
                 }
             }
@@ -207,19 +245,19 @@ async function initData() {
         console.error(error);
         const loadingDiv = document.getElementById("loading");
         if (loadingDiv) {
-            loadingDiv.innerHTML = `<p class="text-danger">${
-                langPack[currentLang].errorLoad
-            }: ${error.message}</p>`;
+            loadingDiv.innerHTML = `<p class="text-danger">${langPack[currentLang].errorLoad}: ${error.message}</p>`;
         }
     }
 }
 
 function getStationName(station) {
-    return station.name[currentLang] || station.name["zh-Hans"];
+    return station.name[currentLang] || station.name["zh-Hans"] || station.id;
 }
 
 function getLineName(code) {
-    return lineMap[code] ? lineMap[code][currentLang] : code;
+    if (lineMap[code] && lineMap[code][currentLang])
+        return lineMap[code][currentLang];
+    return code;
 }
 
 function populateLineSelects() {
@@ -231,10 +269,12 @@ function populateLineSelects() {
     select1.innerHTML = "";
     select2.innerHTML = "";
     lineList.forEach((line) => {
-        const displayName =
-            currentLang === "zh-Hans"
-                ? `${line.nameZh} ${line.code}`
-                : `${line.nameEn} ${line.code}`;
+        let displayName;
+        if (currentLang === "zh-Hans")
+            displayName = `${line.nameZh} ${line.code}`;
+        else if (currentLang === "zh-Hant")
+            displayName = `${line.nameZhHant} ${line.code}`;
+        else displayName = `${line.nameEn} ${line.code}`;
         const option1 = new Option(displayName, line.code);
         const option2 = new Option(displayName, line.code);
         select1.appendChild(option1);
@@ -293,10 +333,11 @@ function displayFilteredResults(filteredData) {
             const lineNames = station.lineGroups
                 .flat()
                 .map((code) => getLineName(code))
+                .filter((l) => l)
                 .join("，");
             html += `<li class="list-group-item text-no-theme">`;
             html += `<strong>${stationName}</strong> <span class="station-id">${station.id}</span><br>`;
-            html += `<span class="text-no-theme">${t.stationLines} ${lineNames}</span>`;
+            html += `<span class="text-no-theme">${t.stationLines} ${lineNames || "（无线路）"}</span>`;
             html += `</li>`;
         });
         html += `</ul>`;
@@ -310,10 +351,11 @@ function displayFilteredResults(filteredData) {
             const lineNames = station.lineGroups
                 .flat()
                 .map((code) => getLineName(code))
+                .filter((l) => l)
                 .join("，");
             html += `<li class="list-group-item text-no-theme">`;
             html += `<strong>${stationName}</strong> <span class="station-id">${station.id}</span><br>`;
-            html += `<span class="text-no-theme">${t.stationLines} ${lineNames}</span>`;
+            html += `<span class="text-no-theme">${t.stationLines} ${lineNames || "（无线路）"}</span>`;
             html += `</li>`;
         });
         html += `</ul>`;

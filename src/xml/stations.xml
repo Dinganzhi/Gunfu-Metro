@@ -37,7 +37,7 @@
         <name>
             <zh-Hans>合欢沟/金合欢小区</zh-Hans>
             <zh-Hant></zh-Hant>
-            <en>Hehuan'gou / Jinhehuan Housing Estate</en>
+            <en>Hehuan'gou / Acacia Housing Estate</en>
         </name>
         <line>A4;B1,B3,B4</line>
         <connections>
@@ -222,11 +222,13 @@
         <line>A1,A3;C1</line>
         <connections>
             <connection to="B001" distance="387" by="C1" />
-            <connection to="B003" distance="210" by="A1" />
+            <!--<connection to="B003" distance="210" by="A1" />-->
+            <connection to="B004" distance="" by="A2"/>
             <connection to="B005" distance="781" by="A3" />
         </connections>
         <location>-6,68,2978;9,61,2959</location>
     </station>
+    <!--
     <station>
         <id>B003</id>
         <name>
@@ -240,6 +242,7 @@
             <connection to="B004" distance="865" by="A2" />
         </connections>
     </station>
+    -->
     <station>
         <id>B004</id>
         <name>
@@ -249,6 +252,7 @@
         </name>
         <line>A2</line>
         <connections>
+            <connection to="B001" distance="" by="A2"/>
             <connection to="B003" distance="865" by="A2"/>
         </connections>
     </station>

@@ -20,8 +20,50 @@
         <msg>你能行</msg>
         <msg>吓人</msg>
         <msg>总有你满意的</msg>
-        <msg>生物适应环境</msg>  
+        <msg>生物适应环境</msg>
+        <msg>禁止倚靠</msg>
+        <msg>小心地滑</msg>
+        <msg>古罗马斗兽场</msg>
+        <msg>今天天气很好</msg>
+        <msg>曾几何时</msg>
+        <msg>快马加鞭</msg>
+        <msg>从来只在意你</msg>
+        <msg>两点之间线段最短</msg>
+        <msg>向前走</msg>
+        <msg>抛去所有的烦恼</msg>
     </zh-Hans>
+    <zh-Hant>
+        <msg>都跟你說了不要動這東西</msg>
+        <msg>自己才是最重要的</msg>
+        <msg>先別急</msg>
+        <msg>閒人免入</msg>
+        <msg>java.lang.NullPointerException</msg>
+        <msg>不要在意太多</msg>
+        <msg>知道就好</msg>
+        <msg>像素</msg>
+        <msg>深藏不露</msg>
+        <msg>小心觸電</msg>
+        <msg>回去等通知吧</msg>
+        <msg>十分穩定</msg>
+        <msg>多試試</msg>
+        <msg>記得睡覺</msg>
+        <msg>這很神聖啊</msg>
+        <msg>要學到精髓</msg>
+        <msg>你能行</msg>
+        <msg>嚇人</msg>
+        <msg>總有你滿意的</msg>
+        <msg>生物適應環境</msg>
+        <msg>禁止倚靠</msg>
+        <msg>小心地滑</msg>
+        <msg>古羅馬鬥獸場</msg>
+        <msg>今天天氣很好</msg>
+        <msg>曾幾何時</msg>
+        <msg>快馬加鞭</msg>
+        <msg>從來只在意你</msg>
+        <msg>兩點之間線段最短</msg>
+        <msg>向前走</msg>
+        <msg>拋去所有的煩惱</msg>
+    </zh-Hant>
     <en>
         <msg>I told you not to touch this thing</msg>
         <msg>You yourself are the most important</msg>
@@ -31,7 +73,7 @@
         <msg>Don't care too much</msg>
         <msg>Glad you know</msg>
         <msg>Pixel</msg>
-        <msg>Still waters run deep</msg>
+        <msg>Hidden in the Depths</msg>
         <msg>Caution: electric shock hazard</msg>
         <msg>Go back and wait for notification</msg>
         <msg>Very stable</msg>
@@ -43,5 +85,15 @@
         <msg>Scary</msg>
         <msg>There's always something you'll like</msg>
         <msg>Organisms adapt to the environment</msg>
+        <msg>No leaning</msg>
+        <msg>Caution: wet floor</msg>
+        <msg>Roman Colosseum</msg>
+        <msg>The weather is very nice today</msg>
+        <msg>Once upon a time</msg>
+        <msg>At full speed</msg>
+        <msg>I only ever care about you</msg>
+        <msg>The shortest path between two points is a straight line</msg>
+        <msg>Walk forward</msg>
+        <msg>Cast away all your worries</msg>
     </en>
 </text>

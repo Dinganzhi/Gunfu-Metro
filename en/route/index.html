@@ -34,33 +34,21 @@
                     <h4>Find the Best Route between Two Stations.</h4>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label for="startStation" class="form-label"
-                                >Start Station</label
-                            >
+                            <label for="startStation" class="form-label">Start Station</label>
                             <select id="startStation" class="form-select">
-                                <option value="">
-                                    Please Choose Start Station
-                                </option>
+                                <option value="">Please Choose Start Station</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="endStation" class="form-label"
-                                >End Station</label
-                            >
+                            <label for="endStation" class="form-label">End Station</label>
                             <select id="endStation" class="form-select">
-                                <option value="">
-                                    Please Choose End Station
-                                </option>
+                                <option value="">Please Choose End Station</option>
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="algorithm" class="form-label"
-                                >Sorting Method</label
-                            >
+                            <label for="algorithm" class="form-label">Sorting Method</label>
                             <select id="algorithm" class="form-select">
-                                <option value="distance">
-                                    Shortest Distance
-                                </option>
+                                <option value="distance">Shortest Distance</option>
                                 <option value="transfer">Least Transfer</option>
                             </select>
                         </div>
@@ -76,9 +64,7 @@
                             Allow Exiting-station Transfer / Informal Transfer
                         </label>
                     </div>
-                    <button id="calcBtn" class="btn btn-primary mt-3">
-                        Find Route
-                    </button>
+                    <button id="calcBtn" class="btn btn-primary mt-3">Find Route</button>
                     <div id="loading" class="mt-3">Loading Data...</div>
                     <div id="result" class="mt-3"></div>
                 </div>
@@ -86,10 +72,5 @@
         </div>
 
         <script src="/src/js/route.js" defer></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                SettingsManager.init(); // 自动读取 Cookie 并应用主题、字体、语言
-            });
-        </script>
     </body>
 </html>

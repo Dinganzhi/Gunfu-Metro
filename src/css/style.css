@@ -35,6 +35,14 @@ svg {
     background-color: white;
 }
 
+.network-map {
+    overflow: visible;
+    width: 100%;
+    height: auto;
+    border: 3px;
+    border-color: black;
+    border-style: double;
+}
 .station-id {
     color: gray;
     font-size: 0.9em;

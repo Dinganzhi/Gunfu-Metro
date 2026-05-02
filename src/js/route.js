@@ -63,8 +63,7 @@ const langPack = {
         pathCount: (n) => `Found ${n} route(s):`,
         pathHeader: (idx, transfer, dist) =>
             `Route ${idx + 1} · ${transfer} transfer(s) · Total distance ${dist}m`,
-        rideTo: (line, to, dist) =>
-            `→ Take ${line} to ${to}, distance ${dist}m`,
+        rideTo: (line, to, dist) => `→ Take ${line} to ${to}, distance ${dist}m`,
         transfer: "↺ Transfer",
         outStationTransfer: "↺ Exiting-station Transfer / Informal Transfer",
         viaStations: "Via stations:",
@@ -86,15 +85,12 @@ let maxGroups = 0;
 let isDataLoaded = false;
 let currentLang = "zh-Hans";
 
-// ---------- 语言检测（仅页面加载时执行一次）----------
+// ---------- 语言检测 ----------
 function detectLanguage() {
-    const cookieLang = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("language="));
+    const cookieLang = document.cookie.split("; ").find((row) => row.startsWith("language="));
     if (cookieLang) {
         const lang = cookieLang.split("=")[1];
-        if (lang === "zh-Hans" || lang === "zh-Hant" || lang === "en")
-            return lang;
+        if (lang === "zh-Hans" || lang === "zh-Hant" || lang === "en") return lang;
     }
     const path = window.location.pathname;
     if (path.includes("/zh-Hant/")) return "zh-Hant";
@@ -111,8 +107,7 @@ function applyUILanguage() {
             label.innerText = t.startStation;
         if (text === "终点站" || text === "終點站" || text === "End Station")
             label.innerText = t.endStation;
-        if (text === "排序方式" || text === "Sorting Method")
-            label.innerText = t.algorithm;
+        if (text === "排序方式" || text === "Sorting Method") label.innerText = t.algorithm;
         if (
             text === "允许出站换乘/转乘" ||
             text === "容許出站換乘／轉乘" ||
@@ -131,18 +126,10 @@ function applyUILanguage() {
     if (loadingDiv && !isDataLoaded) loadingDiv.innerText = t.loading;
     const startSelect = document.getElementById("startStation");
     const endSelect = document.getElementById("endStation");
-    if (
-        startSelect &&
-        startSelect.options[0] &&
-        startSelect.options[0].value === ""
-    ) {
+    if (startSelect && startSelect.options[0] && startSelect.options[0].value === "") {
         startSelect.options[0].text = t.defaultOption;
     }
-    if (
-        endSelect &&
-        endSelect.options[0] &&
-        endSelect.options[0].value === ""
-    ) {
+    if (endSelect && endSelect.options[0] && endSelect.options[0].value === "") {
         endSelect.options[0].text = t.defaultOption;
     }
 }
@@ -153,39 +140,19 @@ async function initData() {
         await loadXMLData("/src/xml/lines.xml", (xmlDoc) => {
             const lineElements = xmlDoc.getElementsByTagName("line");
             for (let i = 0; i < lineElements.length; i++) {
-                const code = lineElements[i]
-                    .getElementsByTagName("code")[0]
-                    ?.textContent?.trim();
+                const code = lineElements[i].getElementsByTagName("code")[0]?.textContent?.trim();
                 const nameEl = lineElements[i].getElementsByTagName("name")[0];
                 if (nameEl && code) {
-                    const zhHans = nameEl
-                        .getElementsByTagName("zh-Hans")[0]
-                        ?.textContent?.trim();
-                    const zhHant = nameEl
-                        .getElementsByTagName("zh-Hant")[0]
-                        ?.textContent?.trim();
-                    const en = nameEl
-                        .getElementsByTagName("en")[0]
-                        ?.textContent?.trim();
+                    const zhHans = nameEl.getElementsByTagName("zh-Hans")[0]?.textContent?.trim();
+                    const zhHant = nameEl.getElementsByTagName("zh-Hant")[0]?.textContent?.trim();
+                    const en = nameEl.getElementsByTagName("en")[0]?.textContent?.trim();
                     if (zhHans && zhHant && en) {
-                        lineMap[code] = {
-                            "zh-Hans": zhHans,
-                            "zh-Hant": zhHant,
-                            en,
-                        };
+                        lineMap[code] = { "zh-Hans": zhHans, "zh-Hant": zhHant, en };
                     } else {
-                        lineMap[code] = {
-                            "zh-Hans": code,
-                            "zh-Hant": code,
-                            en: code,
-                        };
+                        lineMap[code] = { "zh-Hans": code, "zh-Hant": code, en: code };
                     }
                 } else if (code) {
-                    lineMap[code] = {
-                        "zh-Hans": code,
-                        "zh-Hant": code,
-                        en: code,
-                    };
+                    lineMap[code] = { "zh-Hans": code, "zh-Hant": code, en: code };
                 }
             }
         });
@@ -194,23 +161,14 @@ async function initData() {
             const stationElements = xmlDoc.getElementsByTagName("station");
             for (let i = 0; i < stationElements.length; i++) {
                 const idEl = stationElements[i].getElementsByTagName("id")[0];
-                const nameEl =
-                    stationElements[i].getElementsByTagName("name")[0];
-                const lineEl =
-                    stationElements[i].getElementsByTagName("line")[0];
-                const connectionsEl =
-                    stationElements[i].getElementsByTagName("connections")[0];
+                const nameEl = stationElements[i].getElementsByTagName("name")[0];
+                const lineEl = stationElements[i].getElementsByTagName("line")[0];
+                const connectionsEl = stationElements[i].getElementsByTagName("connections")[0];
                 if (idEl && nameEl && lineEl) {
                     const id = idEl.textContent.trim();
-                    const zhHans = nameEl
-                        .getElementsByTagName("zh-Hans")[0]
-                        ?.textContent?.trim();
-                    const zhHant = nameEl
-                        .getElementsByTagName("zh-Hant")[0]
-                        ?.textContent?.trim();
-                    const en = nameEl
-                        .getElementsByTagName("en")[0]
-                        ?.textContent?.trim();
+                    const zhHans = nameEl.getElementsByTagName("zh-Hans")[0]?.textContent?.trim();
+                    const zhHant = nameEl.getElementsByTagName("zh-Hant")[0]?.textContent?.trim();
+                    const en = nameEl.getElementsByTagName("en")[0]?.textContent?.trim();
                     if (!zhHans || !zhHant || !en) {
                         stations.push({
                             id,
@@ -225,19 +183,13 @@ async function initData() {
                     let line = lineEl.textContent?.trim() || "";
                     let connections = [];
                     if (connectionsEl) {
-                        const connNodes =
-                            connectionsEl.getElementsByTagName("connection");
+                        const connNodes = connectionsEl.getElementsByTagName("connection");
                         for (let j = 0; j < connNodes.length; j++) {
                             const to = connNodes[j].getAttribute("to");
-                            const distance =
-                                connNodes[j].getAttribute("distance");
+                            const distance = connNodes[j].getAttribute("distance");
                             const by = connNodes[j].getAttribute("by");
                             if (to && distance && by) {
-                                connections.push({
-                                    to,
-                                    distance: parseFloat(distance),
-                                    by,
-                                });
+                                connections.push({ to, distance: parseFloat(distance), by });
                             }
                         }
                     }
@@ -252,13 +204,7 @@ async function initData() {
                     }
                     if (lineGroups.length === 0) lineGroups = [[]];
                     maxGroups = Math.max(maxGroups, lineGroups.length);
-                    stations.push({
-                        id,
-                        name,
-                        lineGroups,
-                        rawLine: line,
-                        connections,
-                    });
+                    stations.push({ id, name, lineGroups, rawLine: line, connections });
                 }
             }
         });
@@ -287,16 +233,11 @@ function loadXMLData(url, callback) {
                     let xmlDoc = xhr.responseXML;
                     if (!xmlDoc || !xmlDoc.documentElement) {
                         const parser = new DOMParser();
-                        xmlDoc = parser.parseFromString(
-                            xhr.responseText,
-                            "text/xml",
-                        );
+                        xmlDoc = parser.parseFromString(xhr.responseText, "text/xml");
                         const parseError = xmlDoc.querySelector("parsererror");
                         if (parseError) {
                             reject(
-                                new Error(
-                                    `XML parse error in ${url}: ${parseError.textContent}`,
-                                ),
+                                new Error(`XML parse error in ${url}: ${parseError.textContent}`),
                             );
                             return;
                         }
@@ -322,8 +263,7 @@ function getStationName(station) {
 }
 
 function getLineName(code) {
-    if (lineMap[code] && lineMap[code][currentLang])
-        return lineMap[code][currentLang];
+    if (lineMap[code] && lineMap[code][currentLang]) return lineMap[code][currentLang];
     return code;
 }
 
@@ -342,10 +282,8 @@ function populateStationSelects() {
         startSelect.appendChild(option1);
         endSelect.appendChild(option2);
     });
-    if (oldStart && stations.some((s) => s.id === oldStart))
-        startSelect.value = oldStart;
-    if (oldEnd && stations.some((s) => s.id === oldEnd))
-        endSelect.value = oldEnd;
+    if (oldStart && stations.some((s) => s.id === oldStart)) startSelect.value = oldStart;
+    if (oldEnd && stations.some((s) => s.id === oldEnd)) endSelect.value = oldEnd;
 }
 
 // ---------- 路径搜索核心 ----------
@@ -439,8 +377,7 @@ function findKPaths(startId, endId, algorithm, allowCrossGroup) {
             const oldList = best[vState];
             let shouldAdd = false;
             if (oldList.length < K) shouldAdd = true;
-            else if (comparator(newLabel, oldList[oldList.length - 1]) < 0)
-                shouldAdd = true;
+            else if (comparator(newLabel, oldList[oldList.length - 1]) < 0) shouldAdd = true;
             if (shouldAdd) {
                 oldList.push(newLabel);
                 oldList.sort(comparator);
@@ -456,23 +393,16 @@ function findKPaths(startId, endId, algorithm, allowCrossGroup) {
                 const newState = u * maxGroups + g2;
                 const newTransfer = cur.transfer + 1;
                 const newDist = cur.dist;
-                const newLabel = new Label(
-                    newTransfer,
-                    newDist,
-                    newState,
-                    cur,
-                    {
-                        type: "transfer",
-                        station: u,
-                        fromGroup: g,
-                        toGroup: g2,
-                    },
-                );
+                const newLabel = new Label(newTransfer, newDist, newState, cur, {
+                    type: "transfer",
+                    station: u,
+                    fromGroup: g,
+                    toGroup: g2,
+                });
                 const oldList = best[newState];
                 let shouldAdd = false;
                 if (oldList.length < K) shouldAdd = true;
-                else if (comparator(newLabel, oldList[oldList.length - 1]) < 0)
-                    shouldAdd = true;
+                else if (comparator(newLabel, oldList[oldList.length - 1]) < 0) shouldAdd = true;
                 if (shouldAdd) {
                     oldList.push(newLabel);
                     oldList.sort(comparator);
@@ -508,9 +438,7 @@ function findKPaths(startId, endId, algorithm, allowCrossGroup) {
         for (let p of uniquePaths) {
             if (
                 p.stationSequence.length === path.stationSequence.length &&
-                p.stationSequence.every(
-                    (val, idx) => val === path.stationSequence[idx],
-                )
+                p.stationSequence.every((val, idx) => val === path.stationSequence[idx])
             ) {
                 duplicate = true;
                 break;
@@ -525,8 +453,9 @@ function findKPaths(startId, endId, algorithm, allowCrossGroup) {
     return uniquePaths.slice(0, K);
 }
 
+// 修正后的 reconstructPath（完全基于乘坐段线路变化，忽略算法中的 transfer 边）
 function reconstructPath(label) {
-    // 1. 回溯得到原始步骤序列（状态+边）
+    // 1. 回溯得到原始步骤序列
     const rawSteps = [];
     let cur = label;
     while (cur) {
@@ -540,29 +469,15 @@ function reconstructPath(label) {
             transfer: 0,
             dist: 0,
             steps: [
-                {
-                    type: "station",
-                    stationIdx: rawSteps[0].stationIdx,
-                    isStart: true,
-                    isEnd: true,
-                },
+                { type: "station", stationIdx: rawSteps[0].stationIdx, isStart: true, isEnd: true },
             ],
             stationSequence: [rawSteps[0].stationIdx],
         };
     }
 
-    // 2. 构建乘车段（ride）和换乘边（transfer）的原始列表，同时记录路径上的所有站点顺序
-    // 我们最终需要呈现的格式：站点1 → 乘坐(线路, 距离) → 站点2 → [换乘标记] → 站点3 → 乘坐...
-    // 因此需要先提取出所有站点（包括起点和终点）以及每段乘坐对应的线路和距离。
-
-    // 解析步骤，构建一个更易于处理的序列
-    // 我们创建一个 events 数组，存储 { type, stationIdx, line, distance, viaStations }
-    const events = [];
-    events.push({ type: "station", stationIdx: rawSteps[0].stationIdx }); // 起点
-
-    // 用于合并连续相同线路的乘坐段
-    let lastRide = null;
-
+    // 2. 提取所有乘坐段（ride），合并相同线路的连续段
+    const rideSegments = [];
+    let currentRide = null;
     for (let i = 1; i < rawSteps.length; i++) {
         const step = rawSteps[i];
         const edge = step.edge;
@@ -572,26 +487,16 @@ function reconstructPath(label) {
             const from = edge.from;
             const to = edge.to;
             const distance = edge.distance;
-            const via = step.stationIdx; // 当前到达的站点（中间可能既是到达站也是出发站，但实际乘坐段已经包含了从 from 到 to 的一步）
-            if (lastRide && lastRide.line === line) {
-                // 合并
-                lastRide.distance += distance;
-                lastRide.to = to;
-                if (via !== lastRide.from && via !== lastRide.to) {
-                    lastRide.viaStations.push(via);
+            const via = step.stationIdx;
+            if (currentRide && currentRide.line === line) {
+                currentRide.distance += distance;
+                currentRide.to = to;
+                if (via !== currentRide.from && via !== currentRide.to) {
+                    currentRide.viaStations.push(via);
                 }
             } else {
-                if (lastRide) {
-                    events.push({
-                        type: "ride",
-                        line: lastRide.line,
-                        from: lastRide.from,
-                        to: lastRide.to,
-                        distance: lastRide.distance,
-                        viaStations: lastRide.viaStations,
-                    });
-                }
-                lastRide = {
+                if (currentRide) rideSegments.push(currentRide);
+                currentRide = {
                     line: line,
                     from: from,
                     to: to,
@@ -599,111 +504,53 @@ function reconstructPath(label) {
                     viaStations: via !== from && via !== to ? [via] : [],
                 };
             }
-        } else if (edge.type === "transfer") {
-            // 换乘边（仅跨组换乘）
-            if (lastRide) {
-                events.push({
-                    type: "ride",
-                    line: lastRide.line,
-                    from: lastRide.from,
-                    to: lastRide.to,
-                    distance: lastRide.distance,
-                    viaStations: lastRide.viaStations,
-                });
-                lastRide = null;
-            }
-            events.push({ type: "transfer", stationIdx: edge.station });
         }
+        // 忽略 edge.type === "transfer" 的边
     }
-    if (lastRide) {
-        events.push({
-            type: "ride",
-            line: lastRide.line,
-            from: lastRide.from,
-            to: lastRide.to,
-            distance: lastRide.distance,
-            viaStations: lastRide.viaStations,
-        });
-    }
+    if (currentRide) rideSegments.push(currentRide);
 
-    // 3. 遍历 events，构建最终显示步骤，并确定换乘信息
+    // 3. 构建最终显示步骤
     const finalSteps = [];
-    // 辅助：获取站点的 lineGroups
-    const getStationGroups = (idx) => stations[idx].lineGroups;
-
-    // 记录上一次乘坐的线路（用于判断是否需要换乘）
+    // 起点
+    const startStationIdx = rawSteps[0].stationIdx;
+    finalSteps.push({ type: "station", stationIdx: startStationIdx, isStart: true });
+    let prevStationIdx = startStationIdx;
     let prevRideLine = null;
-    // 记录上一个站点索引（用于判断换乘类型）
-    let prevStationIdx = null;
 
-    for (let i = 0; i < events.length; i++) {
-        const ev = events[i];
-        if (ev.type === "station") {
-            // 站点
-            finalSteps.push({ type: "station", stationIdx: ev.stationIdx });
-            prevStationIdx = ev.stationIdx;
-        } else if (ev.type === "ride") {
-            // 乘坐段
-            const currentLine = ev.line;
-            const currentTo = ev.to;
-            // 检查是否需要添加换乘标记（如果当前线路与上一次乘坐线路不同，且不是第一次乘坐）
-            if (
-                prevRideLine !== null &&
-                prevRideLine !== currentLine &&
-                prevStationIdx !== null
-            ) {
-                // 需要判断换乘类型：组内换乘还是跨组换乘
-                // 获取上一个站点的所有线路组
-                const prevStationGroups = getStationGroups(prevStationIdx);
-                // 判断是否在同一组内：即是否存在一个组同时包含 prevRideLine 和 currentLine
-                let isSameGroup = false;
-                for (const group of prevStationGroups) {
-                    if (
-                        group.includes(prevRideLine) &&
-                        group.includes(currentLine)
-                    ) {
-                        isSameGroup = true;
-                        break;
-                    }
+    for (let i = 0; i < rideSegments.length; i++) {
+        const seg = rideSegments[i];
+        const currentLine = seg.line;
+        const currentTo = seg.to;
+        // 检查换乘（与上一次乘坐线路不同）
+        if (prevRideLine !== null && prevRideLine !== currentLine) {
+            // 判断换乘类型：同组换乘还是跨组换乘
+            const prevStationGroups = stations[prevStationIdx].lineGroups;
+            let isSameGroup = false;
+            for (const group of prevStationGroups) {
+                if (group.includes(prevRideLine) && group.includes(currentLine)) {
+                    isSameGroup = true;
+                    break;
                 }
-                const transferType = isSameGroup
-                    ? "transfer"
-                    : "outStationTransfer";
-                finalSteps.push({
-                    type: "transfer",
-                    transferType: transferType,
-                });
             }
-            // 添加乘坐段
-            finalSteps.push({
-                type: "ride",
-                line: currentLine,
-                to: currentTo,
-                distance: ev.distance,
-                viaStations: ev.viaStations,
-            });
-            prevRideLine = currentLine;
-            // 注意：乘坐段后的站点将在下一个 event 中作为 station 添加，但这里需要确保终点站存在
-            // 如果下一个 event 不是 station（比如是 transfer 或 ride），则需要主动添加到达站
-            const nextEv = events[i + 1];
-            if (!nextEv || nextEv.type !== "station") {
-                finalSteps.push({ type: "station", stationIdx: currentTo });
-                prevStationIdx = currentTo;
-            }
-        } else if (ev.type === "transfer") {
-            // 跨组换乘（算法中的 transfer 边）已经在上面的换乘判断中覆盖，但此处保留以防遗漏
-            // 实际上算法中的 transfer 边会在 ride 之间被捕获，这里可能不需要额外处理
-            // 但为了保险，如果单独出现 transfer 边（无前 ride），则直接添加换乘标记
-            if (prevRideLine !== null) {
-                finalSteps.push({
-                    type: "transfer",
-                    transferType: "outStationTransfer",
-                });
-            }
+            const transferType = isSameGroup ? "transfer" : "outStationTransfer";
+            finalSteps.push({ type: "transfer", transferType: transferType });
         }
+        // 添加乘坐段
+        finalSteps.push({
+            type: "ride",
+            line: currentLine,
+            to: currentTo,
+            distance: seg.distance,
+            viaStations: seg.viaStations,
+        });
+        // 添加到达站
+        finalSteps.push({ type: "station", stationIdx: currentTo });
+        // 更新记录
+        prevRideLine = currentLine;
+        prevStationIdx = currentTo;
     }
 
-    // 去重连续的 station（有可能出现连续两个相同 station）
+    // 去重连续的 station
     const dedupSteps = [];
     for (let i = 0; i < finalSteps.length; i++) {
         const step = finalSteps[i];
@@ -721,16 +568,12 @@ function reconstructPath(label) {
         }
     }
 
-    // 标记起点和终点
-    if (dedupSteps.length > 0 && dedupSteps[0].type === "station")
-        dedupSteps[0].isStart = true;
-    if (
-        dedupSteps.length > 0 &&
-        dedupSteps[dedupSteps.length - 1].type === "station"
-    )
+    // 标记终点
+    if (dedupSteps.length > 0 && dedupSteps[dedupSteps.length - 1].type === "station") {
         dedupSteps[dedupSteps.length - 1].isEnd = true;
+    }
 
-    // 计算换乘次数（仅统计 type === "transfer" 的步数）
+    // 计算换乘次数和总距离
     let transferCount = 0;
     let totalDist = 0;
     for (const step of dedupSteps) {
@@ -738,15 +581,8 @@ function reconstructPath(label) {
         else if (step.type === "ride") totalDist += step.distance;
     }
 
-    const stationSequence = dedupSteps
-        .filter((s) => s.type === "station")
-        .map((s) => s.stationIdx);
-    return {
-        transfer: transferCount,
-        dist: totalDist,
-        steps: dedupSteps,
-        stationSequence,
-    };
+    const stationSequence = dedupSteps.filter((s) => s.type === "station").map((s) => s.stationIdx);
+    return { transfer: transferCount, dist: totalDist, steps: dedupSteps, stationSequence };
 }
 
 function displayPaths(paths) {
@@ -808,9 +644,7 @@ function displayPaths(paths) {
                 html += `</li>`;
             } else if (step.type === "transfer") {
                 const transferText =
-                    step.transferType === "outStationTransfer"
-                        ? t.outStationTransfer
-                        : t.transfer;
+                    step.transferType === "outStationTransfer" ? t.outStationTransfer : t.transfer;
                 html += `<li class="list-group-item step-transfer text-no-theme">${transferText}</li>`;
             }
         }
@@ -907,8 +741,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         const algorithm = document.getElementById("algorithm").value;
-        const allowCrossGroup =
-            document.getElementById("allowCrossGroup").checked;
+        const allowCrossGroup = document.getElementById("allowCrossGroup").checked;
         const paths = findKPaths(startId, endId, algorithm, allowCrossGroup);
         document.getElementById("result").innerHTML = displayPaths(paths);
     });
